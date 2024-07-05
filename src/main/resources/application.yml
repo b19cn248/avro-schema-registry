@@ -1,6 +1,3 @@
-topic:
-  name: javatechie-avro
-
 server:
   port: 8183
 

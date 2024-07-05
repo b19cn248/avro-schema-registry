@@ -11,6 +11,10 @@ services:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_SERVER_ID: 1
       ZOOKEEPER_SERVERS: zookeeper:2888:3888
+    volumes:
+      - "./volumes/zookeeper/data:/var/lib/zookeeper/data"
+      - "./volumes/zookeeper/transactions:/var/lib/zookeeper/log"
+    user: "1000:1000"
 
   kafka:
     image: confluentinc/cp-kafka:7.3.0
@@ -34,9 +38,12 @@ services:
       KAFKA_JMX_HOSTNAME: ${DOCKER_HOST_IP:-127.0.0.1}
       KAFKA_AUTHORIZER_CLASS_NAME: kafka.security.authorizer.AclAuthorizer
       KAFKA_ALLOW_EVERYONE_IF_NO_ACL_FOUND: "true"
+    volumes:
+      - "./volumes/kafka/kafka:/var/lib/kafka/data"
     depends_on:
       - zookeeper
-      
+    user: "1000:1000"
+
   kafka2:
     image: confluentinc/cp-kafka:7.3.0
     hostname: kafka2
@@ -52,8 +59,11 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+    volumes:
+      - "./volumes/kafka/kafka2:/var/lib/kafka/data"
     depends_on:
       - zookeeper
+    user: "1000:1000"
 
   kafka3:
     image: confluentinc/cp-kafka:7.3.0
@@ -70,8 +80,11 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+    volumes:
+      - "./volumes/kafka/kafka3:/var/lib/kafka/data"
     depends_on:
       - zookeeper
+    user: "1000:1000" # Thêm dòng này
 
   schema-registry:
     image: confluentinc/cp-schema-registry:7.3.0
