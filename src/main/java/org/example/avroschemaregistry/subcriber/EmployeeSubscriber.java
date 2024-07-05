@@ -27,8 +27,6 @@ public class EmployeeSubscriber {
           partitions.toString(),
           offsets.toString());
 
-    employees.forEach(employee -> {
-      log.info("Processing employee with id : {}", employee.getId());
-    });
+    employees.forEach(employee -> log.info("Processing employee with id : {}", employee.getId()));
   }
 }

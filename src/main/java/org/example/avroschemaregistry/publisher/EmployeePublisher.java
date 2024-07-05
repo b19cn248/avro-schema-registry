@@ -33,9 +33,9 @@ public class EmployeePublisher {
             )
       );
 
-      log.info("RestaurantApprovalResponseAvroModel sent for order id: {}", UID);
+      log.info("Employee send with ID: {}", UID);
     } catch (Exception e) {
-      log.error("Error while sending RestaurantApprovalResponseAvroModel for order id: {}, error : {}", UID, e.getMessage());
+      log.error("Error while sending Employee with ID: {}, error : {}", UID, e.getMessage());
     }
   }
 }

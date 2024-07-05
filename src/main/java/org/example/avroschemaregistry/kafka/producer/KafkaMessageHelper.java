@@ -25,7 +25,7 @@ public class KafkaMessageHelper {
               avroModel.toString(), paymentRequestTopicName, ex);
       } else {
         RecordMetadata recordMetadata = result.getRecordMetadata();
-        log.info("Received successful response from Kafka for order id: {}, Topic:{}, Partition:{}, Offset:{}, Timestamp:{}",
+        log.info("Received successful response from Kafka for id: {}, Topic:{}, Partition:{}, Offset:{}, Timestamp:{}",
               orderId,
               recordMetadata.topic(),
               recordMetadata.partition(),
